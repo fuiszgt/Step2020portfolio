@@ -25,4 +25,11 @@ function initClasses() {
  function openCard(event){
    const Card = event.target;
    $(Card).addClass("openCard");
+   $(Card).click(closeCard);
  }
+
+ function closeCard(event){
+  const Card = event.target;
+  $(Card).removeClass("openCard");
+  $(Card).click(openCard);
+}
