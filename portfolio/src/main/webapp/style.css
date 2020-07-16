@@ -4,6 +4,7 @@
   width: 650px;
 }
 
+
 #greeting-container {
   margin-top: 20px;
 }
@@ -11,3 +12,20 @@
 #selfie{
     width: 200px;
 }
+
+#header{
+  display: flex;
+}
+
+#header-right{
+}
+
+/*#introduction{
+  display: block;
+}
+
+#explanation{
+  display: block;
+}
+
+*/
