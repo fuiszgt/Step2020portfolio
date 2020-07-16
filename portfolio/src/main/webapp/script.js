@@ -16,8 +16,7 @@
  * Adds a random greeting to the page.
  */
 
-
- function openCard(cardID){
-   cardSelector = "#" + cardID; 
-   $(cardSelector).addClass("openCard"); //this is clumsy. How can I make it in just jQuery?
+ function openCard(event){
+   const Card = event.target;
+   $(Card).addClass("openCard");
  }
