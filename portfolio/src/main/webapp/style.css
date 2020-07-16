@@ -11,7 +11,6 @@ body{
   font-size: 16px;
   color: #212121;
   background-color: #FAFAFA;
-  margin: 20px;
   font-family: Roboto;
   margin-left: auto;
   margin-right: auto;
@@ -43,6 +42,11 @@ body{
   height: 100vh;
 }
 
+.sectionTitle{
+  font-size:24px;
+  margin: 20px;
+}
+
 .cardContainer{
   display: flex;
   flex-wrap: wrap;
@@ -51,6 +55,8 @@ body{
 .card{
  width: 300px; 
  margin: 20px;
+ border-radius: 2px;
+ box-shadow:  1px 1px 5px rgba(0, 0, 0, 0.2)
 }
 
 .cardImg{
@@ -62,11 +68,19 @@ body{
   background-position: 50% 50%;
 }
 
-.cardTitle{
-  font-size: 18px;
+.cardBottom{
+  margin: none;
+  padding: 10px;
 }
 
-.card
+.cardTitle{
+  font-size: 20px;
+  margin: 0px;
+  margin-bottom:10px
+}
+
+.cardSecondary{
+}
 
 .cardLongDesc{
   display: none;
