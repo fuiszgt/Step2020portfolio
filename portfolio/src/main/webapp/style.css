@@ -5,7 +5,14 @@
   width: 650px;
 }
 
+
+
 body{
+  font-size: 16px;
+  color: #212121;
+  background-color: #FAFAFA;
+  margin: 20px;
+  font-family: Roboto;
   margin-left: auto;
   margin-right: auto;
   width: fit-content;
@@ -43,8 +50,7 @@ body{
 
 .card{
  width: 300px; 
- margin-left: 20px;
- margin-right: 20px;
+ margin: 20px;
 }
 
 .cardImg{
@@ -54,6 +60,16 @@ body{
   background-size: cover;
   background-repeat: no-repeat;
   background-position: 50% 50%;
+}
+
+.cardTitle{
+  font-size: 18px;
+}
+
+.card
+
+.cardLongDesc{
+  display: none;
 }
 
 #faz{
