@@ -16,6 +16,12 @@
  * Adds a random greeting to the page.
  */
 
+$(document).ready(initClasses);
+
+function initClasses() {
+  $(".card").click(openCard);
+}
+
  function openCard(event){
    const Card = event.target;
    $(Card).addClass("openCard");
