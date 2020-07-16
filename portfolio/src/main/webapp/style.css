@@ -1,9 +1,15 @@
+
 #content {
   margin-left: auto;
   margin-right: auto;
   width: 650px;
 }
 
+body{
+  margin-left: auto;
+  margin-right: auto;
+  width: fit-content;
+}
 
 #greeting-container {
   margin-top: 20px;
@@ -18,14 +24,9 @@
 }
 
 #header-right{
+  padding-left: 10px;
 }
 
-/*#introduction{
-  display: block;
+#introduction{
+  margin: 0px;
 }
-
-#explanation{
-  display: block;
-}
-
-*/
