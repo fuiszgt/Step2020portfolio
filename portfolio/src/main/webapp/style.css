@@ -59,6 +59,10 @@ body{
  box-shadow:  1px 1px 5px rgba(0, 0, 0, 0.2)
 }
 
+.card > *{
+  pointer-events: none;
+}
+
 .cardImg{
   display: block;
   width: 300px;
@@ -85,6 +89,19 @@ body{
 .cardLongDesc{
   display: none;
 }
+
+.openCard{
+  width:70vw;
+  min-height: 300px;
+}
+
+.openCard > .cardImg{
+  display: none;
+} 
+
+.openCard > .cardLongDesc{
+  display: block;
+} 
 
 #faz{
   background-image: url(images/Fazekas.jpg);
