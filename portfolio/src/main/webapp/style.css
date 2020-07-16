@@ -30,3 +30,7 @@ body{
 #introduction{
   margin: 0px;
 }
+
+.fullPage{
+  height: 100vh;
+}
