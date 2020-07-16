@@ -95,11 +95,11 @@ body{
   min-height: 300px;
 }
 
-.openCard > .cardImg{
+.openCard .cardImg{
   display: none;
 } 
 
-.openCard > .cardLongDesc{
+.openCard .cardLongDesc{
   display: block;
 } 
 
