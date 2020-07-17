@@ -26,6 +26,7 @@ function initClasses() {
    const Card = event.target;
    $(Card).addClass("openCard");
    $(Card).click(closeCard);
+   
  }
 
  function closeCard(event){
