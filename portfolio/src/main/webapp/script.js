@@ -16,9 +16,9 @@
  * Adds a random greeting to the page.
  */
 
-$(document).ready(initClasses);
+$(document).ready(initClickHandlers);
 
-function initClasses() {
+function initClickHandlers() {
   $(".card").click(openCard);
 }
 
