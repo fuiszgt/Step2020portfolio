@@ -17,6 +17,15 @@
  */
 
 $(document).ready(initClasses);
+$(document).ready(initCardImgs);
+
+function initCardImgs(){
+  $(".card-img").each( function(){
+    src = 'url("images/' + $(this).attr('id') +'.jpg")';
+    $(this).css("background-image", src);
+  });
+}
+
 
 function initClasses() {
   $(".card").click(openCard);
