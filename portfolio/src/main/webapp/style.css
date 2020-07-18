@@ -58,9 +58,6 @@ body{
  margin: 20px;
  border-radius: 2px;
  box-shadow:  1px 1px 5px rgba(0, 0, 0, 0.2);
-
- transition: min-height 0.2s linear 0s;
- transition: width 0.2s linear 0.2s;
 }
 
 .card > *{
@@ -73,7 +70,7 @@ body{
   background-size: cover;
   background-repeat: no-repeat;
   background-position: 50% 50%;
-  transition: height 0.2s linear 0s;
+  transition: height 0.25s ease-in-out 0s;
 }
 
 .cardBottom{
@@ -84,11 +81,12 @@ body{
 .cardTitle{
   font-size: 20px;
   margin: 0px;
-  margin-bottom:10px
+  margin-bottom: 5px;
 }
 
 
 .cardSecondary{
+  margin: 0px;
 }
 
 .cardLongDesc{
@@ -97,17 +95,15 @@ body{
 }
 
 .openCard{
-  /*min-height: 300px;*/
 }
 
 .openCard .cardImg{
   height: 0px;
-  /*animation: openCardImg 0.2s linear 0s forwards;*/
 } 
 
 .openCard .cardLongDesc{
   display: block;
-  animation: openCardLongDesc 0.2s ease-in 0.5s forwards;
+  animation: openCardLongDesc 0.2s ease-in 0.4s forwards;
 } 
 
 @keyframes openCardImg{
@@ -117,11 +113,6 @@ body{
 @keyframes openCardLongDesc{
   to{opacity: 1.0}
 }
-
-
-/*.cardContainer:has(> div) .card{
-  display: none;
-}*/
 
 #faz{
   background-image: url(images/Fazekas.jpg);
