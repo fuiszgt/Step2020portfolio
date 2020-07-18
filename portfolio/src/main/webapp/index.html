@@ -4,16 +4,49 @@
     <meta charset="UTF-8">
     <title>Gábor Fuisz - 2020 STEP Internship Portfolio</title>
     <link rel="stylesheet" href="style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="script.js"></script>
   </head>
   <body>
-    <div id="content">
-      <h1>Gábor Fuisz</h1>
-      <img src="images/selfie.jpg" id="selfie">
-      <p>This is my portfolio.</p>
-      <p>Click here to get a random message:</p>
-      <button onclick="addRandomGreeting()">Hello</button>
-      <div id="greeting-container"></div>
+
+    <div id="topSection" class="fullPage">
+      <div id="header">
+        <img src="images/selfie.jpg" id="selfie">
+        <div id="header-right">
+          <h1 id="introduction">My name is Gábor Fuisz</h1>
+          <p id="explanation">And this is my portfolio for the 2020 Google STEP internship.</p>
+        </div>
+      </div>
+    </div> 
+    <div id="eduSection" class="fullPage">
+      <p class="sectionTitle">Education </p>
+      <div class="cardContainer" >
+        <div class="card">
+          <div class="cardImg" id="faz"></div>
+          <div class="cardBottom">
+            <p class="cardTitle">Fazekas Mihály Grammar School</p>
+            <p class="cardSecondary">Special Mathematics class</p>
+            <div class="cardLongDesc">Fazekas has a long history in Mathematical education in the country</div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="cardImg" id="eot"></div>
+          <div class="cardBottom">
+            <p class="cardTitle">Eotvos Lorand University</p>
+            <p class="cardSecondary">Mathematics BSc</p>
+            <div class="cardLongDesc">Bolyai College</div>
+        </div>
+        </div>
+        <div class="card">
+          <div class="cardImg" id="cam"></div>
+          <div class="cardBottom">
+            <p class="cardTitle">University of Cambridge<p>
+            <p class="cardSecondary">Computer Science BSc</p>
+            <div class="cardLongDesc">Churchill college</div>
+          </div>
+        </div>
+      </div>
     </div>
+
   </body>
 </html>

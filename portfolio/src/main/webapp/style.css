@@ -1,7 +1,21 @@
+
 #content {
   margin-left: auto;
   margin-right: auto;
   width: 650px;
+}
+
+
+
+body{
+  font-size: 16px;
+  color: #212121;
+  background-color: #FAFAFA;
+  font-family: Roboto;
+  margin-left: auto;
+  margin-right: auto;
+  width: fit-content;
+  max-width: 80vw;
 }
 
 #greeting-container {
@@ -10,4 +24,107 @@
 
 #selfie{
     width: 200px;
+}
+
+#header{
+  display: flex;
+}
+
+#header-right{
+  padding-left: 10px;
+}
+
+#introduction{
+  margin: 0px;
+}
+
+.fullPage{
+  height: 100vh;
+}
+
+.sectionTitle{
+  font-size:24px;
+  margin: 20px;
+}
+
+.cardContainer{
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.card{
+ width: 330px;
+ height: 210px;
+ margin: 20px;
+ border-radius: 2px;
+ box-shadow:  1px 1px 5px rgba(0, 0, 0, 0.2);
+}
+
+.card > *{
+  pointer-events: none;
+}
+
+.cardImg{
+  display: block;
+  height: 130px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  transition: height 0.25s ease-in-out 0s;
+}
+
+.cardBottom{
+  margin: none;
+  padding: 10px;
+}
+
+.cardTitle{
+  font-size: 20px;
+  margin: 0px;
+  margin-bottom: 0.1rem;
+}
+
+
+.cardSecondary{
+  margin: 0px;
+}
+
+.cardLongDesc{
+  display: none;
+  opacity: 0.0;
+  border-top: #E0E0E0 1px solid;
+  margin-top: 0.4rem;
+  padding-top: 0.4rem;
+}
+
+.openCard{
+}
+
+.openCard .cardImg{
+  height: 0px;
+} 
+
+.openCard .cardLongDesc{
+  display: block;
+  animation: openCardLongDesc 0.2s ease-in 0.4s forwards;
+} 
+
+@keyframes openCardImg{
+  to{height: 0px;}
+}
+
+@keyframes openCardLongDesc{
+  to{opacity: 1.0}
+}
+
+#faz{
+  background-image: url(images/Fazekas.jpg);
+}
+
+#eot{
+  background-image: url(images/ELTE.jpg);
+}
+
+#cam{
+  background-image: url(images/Cambridge.jpg);
 }
