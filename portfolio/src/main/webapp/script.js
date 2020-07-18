@@ -15,22 +15,14 @@
 /**
  * Adds a random greeting to the page.
  */
+function addRandomGreeting() {
+  const greetings =
+      ['Hello world!', '¡Hola Mundo!', '你好，世界！', 'Bonjour le monde!'];
 
-$(document).ready(initClasses);
+  // Pick a random greeting.
+  const greeting = greetings[Math.floor(Math.random() * greetings.length)];
 
-function initClasses() {
-  $(".card").click(openCard);
-}
-
- function openCard(event){
-   const Card = event.target;
-   $(Card).addClass("openCard");
-   $(Card).click(closeCard);
-   
- }
-
- function closeCard(event){
-  const Card = event.target;
-  $(Card).removeClass("openCard");
-  $(Card).click(openCard);
+  // Add it to the page.
+  const greetingContainer = document.getElementById('greeting-container');
+  greetingContainer.innerText = greeting;
 }
