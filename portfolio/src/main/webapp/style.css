@@ -38,16 +38,16 @@ body{
   margin: 0px;
 }
 
-.fullPage{
+.full-page{
   height: 100vh;
 }
 
-.sectionTitle{
+.section-title{
   font-size:24px;
   margin: 20px;
 }
 
-.cardContainer{
+.card-container{
   display: flex;
   flex-wrap: wrap;
 }
@@ -63,7 +63,7 @@ body{
   pointer-events: none;
 }
 
-.cardImg{
+.card-img{
   display: block;
   width: 300px;
   height: 130px;
@@ -72,21 +72,21 @@ body{
   background-position: 50% 50%;
 }
 
-.cardBottom{
+.card-bottom{
   margin: none;
   padding: 10px;
 }
 
-.cardTitle{
+.card-title{
   font-size: 20px;
   margin: 0px;
   margin-bottom:10px
 }
 
-.cardSecondary{
+.card-secondary{
 }
 
-.cardLongDesc{
+.card-long-desc{
   display: none;
 }
 
@@ -95,11 +95,11 @@ body{
   min-height: 300px;
 }
 
-.openCard .cardImg{
+.openCard .card-img{
   display: none;
 } 
 
-.openCard .cardLongDesc{
+.openCard .card-long-desc{
   display: block;
 } 
 
