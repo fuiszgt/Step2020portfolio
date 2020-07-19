@@ -16,8 +16,12 @@
  * Adds a random greeting to the page.
  */
 
-$(document).ready(initClasses);
-$(document).ready(initCardImgs);
+$(document).ready(init);
+
+function init(){
+  initCardImgs();
+  initClasses();
+}
 
 function initCardImgs(){
   $(".card-img").each( function(){
