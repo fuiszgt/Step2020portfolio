@@ -16,20 +16,20 @@
  * Adds a random greeting to the page.
  */
 
-$(document).ready(initClasses);
+$(document).ready(initClickHandlers);
 
-function initClasses() {
+function initClickHandlers() {
   $(".card").click(openCard);
 }
 
  function openCard(event){
-   const Card = event.target;
-   $(Card).addClass("openCard");
-   $(Card).click(closeCard);
+   const card = event.target;
+   $(card).addClass("openCard");
+   $(card).click(closeCard);
  }
 
  function closeCard(event){
-  const Card = event.target;
-  $(Card).removeClass("openCard");
-  $(Card).click(openCard);
+  const card = event.target;
+  $(card).removeClass("openCard");
+  $(card).click(openCard);
 }
