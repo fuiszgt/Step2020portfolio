@@ -16,21 +16,33 @@
  * Adds a random greeting to the page.
  */
 
-$(document).ready(initClasses);
+$(document).ready(init);
 
-function initClasses() {
+function init(){
+  initCardImgs();
+  initClasses();
+}
+
+function initCardImgs(){
+  $(".card-img").each( function(){
+    src = 'url("images/' + $(this).attr('id') +'.jpg")';
+    $(this).css("background-image", src);
+  });
+}
+
+
+function initClickHandlers() {
   $(".card").click(openCard);
 }
 
  function openCard(event){
-   const Card = event.target;
-   $(Card).addClass("openCard");
-   $(Card).click(closeCard);
-   
+   const card = event.target;
+   $(card).addClass("open-card");
+   $(card).click(closeCard);
  }
 
  function closeCard(event){
-  const Card = event.target;
-  $(Card).removeClass("openCard");
-  $(Card).click(openCard);
+  const card = event.target;
+  $(card).removeClass("open-card");
+  $(card).click(openCard);
 }
