@@ -20,7 +20,7 @@ $(document).ready(init);
 
 function init(){
   initCardImgs();
-  initClasses();
+  initClickHandlers();
 }
 
 function initCardImgs(){
@@ -37,12 +37,12 @@ function initClickHandlers() {
 
  function openCard(event){
    const card = event.target;
-   $(card).addClass("openCard");
+   $(card).addClass("open-card");
    $(card).click(closeCard);
  }
 
  function closeCard(event){
   const card = event.target;
-  $(card).removeClass("openCard");
+  $(card).removeClass("open-card");
   $(card).click(openCard);
 }
