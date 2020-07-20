@@ -16,7 +16,20 @@
  * Adds a random greeting to the page.
  */
 
-$(document).ready(initClickHandlers);
+$(document).ready(init);
+
+function init(){
+  initCardImgs();
+  initClasses();
+}
+
+function initCardImgs(){
+  $(".card-img").each( function(){
+    src = 'url("images/' + $(this).attr('id') +'.jpg")';
+    $(this).css("background-image", src);
+  });
+}
+
 
 function initClickHandlers() {
   $(".card").click(openCard);
