@@ -1,13 +1,23 @@
 function initComments()
 {
     fetchData()
-    .then(text => addCommentsToDOM(text))
+    .then(comments => addCommentsToDOM(comments))
     .catch(error => handleFetchError(error));
 }
 
-function addCommentsToDOM(text)
+function addCommentsToDOM(comments)
 {
-    $("#commentSection").html(text);
+    for(id in comments){
+        addSingleComment(id, comments[id]);
+    }
+}
+
+function addSingleComment(id, comment){
+    $("#commentSection").append('<div id="'+id+'"></div>');
+    $("#commentSection #" + id).append('<p class="name"></p>');
+    $("#commentSection #" + id).append('<p class="content"></p>');
+    $("#commentSection #" + id + " .name").html(comment.name);
+    $("#commentSection #" + id + " .content").html(comment.content);
 }
 
 function handleFetchError(exception)
@@ -23,6 +33,6 @@ function fetchData() {
         {
             throw new Error('Network error detected');
         }
-        return response.text();
+        return response.json();
     });
 }
