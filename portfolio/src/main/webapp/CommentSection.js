@@ -1,14 +1,29 @@
-async function initComments(){
-    text = await fetchData();
-    addCommentsToDOM(text);
+ async function initComments()
+{
+    fetchData()
+    .then(text => addCommentsToDOM(text))
+    .catch(error => handleFetchError(error));
 }
 
-function addCommentsToDOM(text){
+function addCommentsToDOM(text)
+{
+    debugger;
     $("#commentSection").html(text);
 }
 
-async function fetchData() {
-    const response = await fetch("/data");
-    const text = await response.text();
-    return text;
+function handleFetchError(text)
+{
+    console.log(text);
+}
+
+function fetchData() {
+    return fetch("/data")
+    .then(response => 
+    {
+        if(!response.ok)
+        {
+            throw new Error('Network error detected');
+        }
+        return response.text();
+    });
 }
