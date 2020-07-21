@@ -7,13 +7,12 @@
 
 function addCommentsToDOM(text)
 {
-    debugger;
     $("#commentSection").html(text);
 }
 
-function handleFetchError(text)
+function handleFetchError(exception)
 {
-    console.log(text);
+    console.error(exception);
 }
 
 function fetchData() {
