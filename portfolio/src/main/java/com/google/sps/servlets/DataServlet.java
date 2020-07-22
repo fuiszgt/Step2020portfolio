@@ -27,7 +27,7 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
 
-  
+  private Gson gson = new Gson();
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -42,8 +42,7 @@ public class DataServlet extends HttpServlet {
   }
 
   private String commentsToJson(Vector<Comment> comments){
-    Gson gson = new Gson();
-    String json = gson.toJson(comments);
+    String json = this.gson.toJson(comments);
     return json;
   }
 }
