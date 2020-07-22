@@ -7,13 +7,12 @@ function initComments()
 
 function addCommentsToDOM(comments)
 {
-    for(id in comments){
-        addSingleComment(id, comments[id]);
-    }
+    comments.forEach(addSingleComment);
 }
 
-function addSingleComment(id, comment){
-    $("#commentSection").append('<div id="'+id+'"></div>');
+function addSingleComment(comment){
+    id = comment.id;
+    $("#commentSection").append('<div id="' + id + '"></div>');
     $("#commentSection #" + id).append('<p class="name"></p>');
     $("#commentSection #" + id).append('<p class="content"></p>');
     $("#commentSection #" + id + " .name").html(comment.name);
