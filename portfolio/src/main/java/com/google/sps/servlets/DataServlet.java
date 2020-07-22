@@ -31,12 +31,18 @@ public class DataServlet extends HttpServlet {
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     response.setContentType("application/json;");
-    Comment comment1 = new Comment("1","Ada","So cool!");
-    Comment comment2 = new Comment("2","G","Don't be evil");
-    this.comments.add(comment1);
-    this.comments.add(comment2);
     String json = commentsToJson();
     response.getWriter().println(json);
+  }
+
+  @Override
+  public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+      int id = this.comments.size();
+      String name = request.getParameter("name");
+      String content = request.getParameter("content");
+      Comment comment = new Comment(id, name, content);
+      this.comments.add(comment);
+      response.sendRedirect("/index.html");
   }
 
   private String commentsToJson(){
