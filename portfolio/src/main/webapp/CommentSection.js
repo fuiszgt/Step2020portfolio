@@ -1,4 +1,4 @@
- async function initComments()
+function initComments()
 {
     fetchData()
     .then(text => addCommentsToDOM(text))
