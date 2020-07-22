@@ -14,6 +14,9 @@
 
 package com.google.sps.servlets;
 
+import java.util.*;
+import com.google.sps.data.Comment;
+import com.google.gson.Gson;
 import java.io.IOException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -24,11 +27,23 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
 
+  
+
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     response.setContentType("application/json;");
-    String json = "{\"1\": {\"name\": \"Ada\", \"content\": \"So cool!\"},\"2\": {\"name\": \"Grace\", \"content\": \"Dont be evil!\"}, \"3\": {\"name\": \"Alan\", \"content\": \"g2g\"}}";
+    Vector<Comment> comments = new Vector<Comment>();
+    Comment comment1 = new Comment("1","Ada","So cool!");
+    Comment comment2 = new Comment("2","G","Don't be evil");
+    comments.add(comment1);
+    comments.add(comment2);
+    String json = commentsToJson(comments);
     response.getWriter().println(json);
+  }
 
+  private String commentsToJson(Vector<Comment> comments){
+    Gson gson = new Gson();
+    String json = gson.toJson(comments);
+    return json;
   }
 }
