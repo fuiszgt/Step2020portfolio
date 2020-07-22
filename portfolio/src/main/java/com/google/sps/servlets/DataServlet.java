@@ -32,7 +32,7 @@ public class DataServlet extends HttpServlet {
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     response.setContentType("application/json");
-    Vector<Comment> comments = new Vector<Comment>();
+    ArrayList<Comment> comments = new ArrayList<Comment>();
     Comment comment1 = new Comment("1","Ada","So cool!");
     Comment comment2 = new Comment("2","G","Don't be evil");
     comments.add(comment1);
@@ -41,7 +41,7 @@ public class DataServlet extends HttpServlet {
     response.getWriter().println(json);
   }
 
-  private String commentsToJson(Vector<Comment> comments){
+  private String commentsToJson(ArrayList<Comment> comments){
     String json = this.gson.toJson(comments);
     return json;
   }
