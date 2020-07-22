@@ -1,8 +1,8 @@
 function initComments()
 {
     fetchData()
-    .then(comments => addCommentsToDOM(comments))
-    .catch(error => handleFetchError(error));
+    .then((comments) => addCommentsToDOM(comments))
+    .catch((error) => handleFetchError(error));
 }
 
 function addCommentsToDOM(comments)
@@ -29,7 +29,7 @@ function handleFetchError(exception)
 
 function fetchData() {
     return fetch("/data")
-    .then(response => 
+    .then((response) => 
     {
         if(!response.ok)
         {
