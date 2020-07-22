@@ -12,11 +12,14 @@ function addCommentsToDOM(comments)
 
 function addSingleComment(comment){
     id = comment.id;
-    $("#commentSection").append('<div id="' + id + '"></div>');
-    $("#commentSection #" + id).append('<p class="name"></p>');
-    $("#commentSection #" + id).append('<p class="content"></p>');
-    $("#commentSection #" + id + " .name").html(comment.name);
-    $("#commentSection #" + id + " .content").html(comment.content);
+    newCommentDiv = $("<div></div>", {"id": id});
+    $("<p></p>").addClass("name")
+    .html(comment.name)
+    .appendTo(newCommentDiv);
+    $("<p></p>").addClass("content")
+    .html(comment.content)
+    .appendTo(newCommentDiv);
+    newCommentDiv.appendTo(#commentSection);
 }
 
 function handleFetchError(exception)
