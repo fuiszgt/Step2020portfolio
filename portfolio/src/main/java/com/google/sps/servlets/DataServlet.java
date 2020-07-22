@@ -22,6 +22,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.ws.rs.core.MediaType;
 
 /** Servlet that returns some example content. TODO: modify this file to handle comments data */
 @WebServlet("/data")
@@ -31,7 +32,7 @@ public class DataServlet extends HttpServlet {
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    response.setContentType("application/json");
+    response.setContentType(MediaType.APPLICATION_JSON);
     ArrayList<Comment> comments = new ArrayList<Comment>();
     Comment comment1 = new Comment("1","Ada","So cool!");
     Comment comment2 = new Comment("2","G","Don't be evil");
