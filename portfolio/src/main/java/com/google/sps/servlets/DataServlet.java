@@ -31,7 +31,7 @@ public class DataServlet extends HttpServlet {
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    response.setContentType("application/json;");
+    response.setContentType("application/json");
     Vector<Comment> comments = new Vector<Comment>();
     Comment comment1 = new Comment("1","Ada","So cool!");
     Comment comment2 = new Comment("2","G","Don't be evil");
