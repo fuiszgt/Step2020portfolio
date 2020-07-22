@@ -28,18 +28,23 @@ import javax.ws.rs.core.MediaType;
 public class DataServlet extends HttpServlet {
 
   private Gson gson = new Gson();
-  private Vector<Comment> comments = new Vector<Comment>();
+  private ArrayList<Comment> comments = new ArrayList<Comment>();
   
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     response.setContentType(MediaType.APPLICATION_JSON);
-    ArrayList<Comment> comments = new ArrayList<Comment>();
-    Comment comment1 = new Comment("1","Ada","So cool!");
-    Comment comment2 = new Comment("2","G","Don't be evil");
-    this.comments.add(comment1);
-    this.comments.add(comment2);
     String json = commentsToJson();
     response.getWriter().println(json);
+  }
+
+  @Override
+  public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+      int id = this.comments.size();
+      String name = request.getParameter("name");
+      String content = request.getParameter("content");
+      Comment comment = new Comment(id, name, content);
+      this.comments.add(comment);
+      response.sendRedirect("/index.html");
   }
 
   private String commentsToJson(){
