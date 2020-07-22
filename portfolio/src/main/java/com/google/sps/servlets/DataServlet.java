@@ -44,7 +44,7 @@ public class DataServlet extends HttpServlet {
       String content = request.getParameter("content");
       Comment comment = new Comment(id, name, content);
       this.comments.add(comment);
-      response.sendRedirect("/index.html");
+      response.sendRedirect("/index.html#commentSection");
   }
 
   private String commentsToJson(){
