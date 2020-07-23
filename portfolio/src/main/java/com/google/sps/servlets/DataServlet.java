@@ -16,6 +16,7 @@ package com.google.sps.servlets;
 
 import java.util.*;
 import com.google.sps.data.Comment;
+import com.google.sps.interfaces.DatastoreInterface;
 import com.google.gson.Gson;
 import java.io.IOException;
 import javax.servlet.annotation.WebServlet;
@@ -23,13 +24,18 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.core.MediaType;
+import com.google.appengine.api.datastore.DatastoreService;
+import com.google.appengine.api.datastore.DatastoreServiceFactory;
+import com.google.appengine.api.datastore.Entity;
+
 
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
 
   private Gson gson = new Gson();
   private ArrayList<Comment> comments = new ArrayList<Comment>();
-  
+  private DatastoreInterface datastoreInterface = new DatastoreInterface();
+
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     response.setContentType(MediaType.APPLICATION_JSON);
@@ -44,6 +50,7 @@ public class DataServlet extends HttpServlet {
       String content = request.getParameter("content");
       Comment comment = new Comment(id, name, content);
       this.comments.add(comment);
+      datastoreInterface.addComment(comment);
       response.sendRedirect("/index.html#commentSection");
   }
 
