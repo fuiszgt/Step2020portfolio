@@ -24,26 +24,31 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.core.MediaType;
 
-/** Servlet that returns some example content. TODO: modify this file to handle comments data */
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
 
   private Gson gson = new Gson();
-
+  private ArrayList<Comment> comments = new ArrayList<Comment>();
+  
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     response.setContentType(MediaType.APPLICATION_JSON);
-    ArrayList<Comment> comments = new ArrayList<Comment>();
-    Comment comment1 = new Comment("1","Ada","So cool!");
-    Comment comment2 = new Comment("2","G","Don't be evil");
-    comments.add(comment1);
-    comments.add(comment2);
-    String json = commentsToJson(comments);
+    String json = commentsToJson();
     response.getWriter().println(json);
   }
 
-  private String commentsToJson(ArrayList<Comment> comments){
-    String json = this.gson.toJson(comments);
+  @Override
+  public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+      int id = this.comments.size();
+      String name = request.getParameter("name");
+      String content = request.getParameter("content");
+      Comment comment = new Comment(id, name, content);
+      this.comments.add(comment);
+      response.sendRedirect("/index.html#commentSection");
+  }
+
+  private String commentsToJson(){
+    String json = gson.toJson(this.comments);
     return json;
   }
 }
