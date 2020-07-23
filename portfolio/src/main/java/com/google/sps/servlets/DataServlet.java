@@ -47,7 +47,8 @@ public class DataServlet extends HttpServlet {
       //TODO: use GSON deserialization
       String name = request.getParameter("name");
       String content = request.getParameter("content");
-      Comment comment = new Comment(0, name, content);
+      Comment comment = new Comment(0, name, content); //Since the ID will only be assigned by the Datastore, I set it to 0. 
+      //What would be a better practice?
       datastoreInterface.addComment(comment);
       response.sendRedirect("/index.html#commentSection");
   }

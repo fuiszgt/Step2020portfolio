@@ -48,7 +48,7 @@ public class DatastoreInterface{
             Comment comment = new Comment(id, name, content);
             comments.add(comment);
         }
-        return comments; //It would be nice to pass by reference here, I do not know how to do that in Java
+        return comments; 
     }
 
     
