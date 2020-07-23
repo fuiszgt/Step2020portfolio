@@ -15,16 +15,16 @@
 package com.google.sps.data;
 
 public class Comment{
-    private int id;
+    private long id;
     private String name;
     private String content;
-    public Comment(int id, String name, String content){
+    public Comment(long id, String name, String content){
         this.id = id;
         this.name = name;
         this.content = content;
     }
 
-    public int getId(){
+    public long getId(){
         return this.id;
     }
     public String getName(){

@@ -33,7 +33,6 @@ import com.google.appengine.api.datastore.Entity;
 public class DataServlet extends HttpServlet {
 
   private Gson gson = new Gson();
-  private ArrayList<Comment> comments = new ArrayList<Comment>();
   private DatastoreInterface datastoreInterface = new DatastoreInterface();
 
   @Override
@@ -45,17 +44,17 @@ public class DataServlet extends HttpServlet {
 
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-      int id = this.comments.size();
+      //TODO: use GSON deserialization
       String name = request.getParameter("name");
       String content = request.getParameter("content");
-      Comment comment = new Comment(id, name, content);
-      this.comments.add(comment);
+      Comment comment = new Comment(0, name, content);
       datastoreInterface.addComment(comment);
       response.sendRedirect("/index.html#commentSection");
   }
 
   private String commentsToJson(){
-    String json = gson.toJson(this.comments);
+    ArrayList<Comment> comments = datastoreInterface.getComments();
+    String json = gson.toJson(comments);
     return json;
   }
 }
