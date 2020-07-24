@@ -19,10 +19,11 @@ import com.googlecode.objectify.annotation.Id;
 
 @Entity
 public class Comment{
-    @Id private long id;
+    @Id
+    private Long id;
     private String name;
     private String content;
-    public Comment(long id, String name, String content){
+    public Comment(Long id, String name, String content){
         this.id = id;
         this.name = name;
         this.content = content;
@@ -33,7 +34,11 @@ public class Comment{
         this.content = content;
     }
 
-    public long getId(){
+    public Comment(){
+        
+    }
+
+    public Long getId(){
         return this.id;
     }
     public String getName(){

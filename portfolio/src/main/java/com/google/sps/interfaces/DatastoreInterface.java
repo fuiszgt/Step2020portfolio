@@ -16,39 +16,18 @@ package com.google.sps.interfaces;
 
 import java.io.*;
 import java.util.*;
-import com.google.appengine.api.datastore.DatastoreService;
-import com.google.appengine.api.datastore.DatastoreServiceFactory;
-import com.google.appengine.api.datastore.Entity;
-import com.google.appengine.api.datastore.Query;
-import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.sps.data.Comment;
 import static com.googlecode.objectify.ObjectifyService.ofy;
 
 public class DatastoreInterface{
-    private DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 
     public void addComment(Comment comment){
-        //TODO: use Objectify
-        Entity commentEntity = new Entity("Comment");
-        commentEntity.setProperty("name", comment.getName());
-        commentEntity.setProperty("content", comment.getContent());
-        this.datastore.put(commentEntity);
+        ofy().save().entity(comment).now();
     }
     
-    public ArrayList<Comment> getComments(){
-        ArrayList<Comment> comments = new ArrayList<Comment>();
-        Query query = new Query("Comment");
-        PreparedQuery results = this.datastore.prepare(query);
-        for (Entity entity : results.asIterable()) {
-            Long id = (Long) entity.getKey().getId();
-            String name = (String) entity.getProperty("name");
-            String content = (String) entity.getProperty("content");
-
-            Comment comment = new Comment(id, name, content);
-            comments.add(comment);
-        }
+    public List<Comment> getComments(){
+        List<Comment> comments = ofy().load().type(Comment.class).list();
         return comments; 
     }
-
-    
+       
 }
