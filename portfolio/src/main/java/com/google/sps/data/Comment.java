@@ -14,8 +14,12 @@
 
 package com.google.sps.data;
 
+import com.googlecode.objectify.annotation.Entity;
+import com.googlecode.objectify.annotation.Id;
+
+@Entity
 public class Comment{
-    private long id;
+    @Id private long id;
     private String name;
     private String content;
     public Comment(long id, String name, String content){

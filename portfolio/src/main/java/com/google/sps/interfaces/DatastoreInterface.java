@@ -22,6 +22,7 @@ import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.sps.data.Comment;
+import static com.googlecode.objectify.ObjectifyService.ofy;
 
 public class DatastoreInterface{
     private DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
