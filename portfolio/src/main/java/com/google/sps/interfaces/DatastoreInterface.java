@@ -35,8 +35,6 @@ public class DatastoreInterface{
     }
     
     public ArrayList<Comment> getComments(){
-        //I was thinking of making this a private field, but I'm not sure
-        //The problem is, that in that case it could end up containing depracted data (e.g. if a comment is added, and it is not refreshed.)
         ArrayList<Comment> comments = new ArrayList<Comment>();
         Query query = new Query("Comment");
         PreparedQuery results = this.datastore.prepare(query);
