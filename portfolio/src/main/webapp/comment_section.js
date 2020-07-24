@@ -19,7 +19,7 @@ function addSingleComment(comment){
     $("<p></p>").addClass("content")
     .html(comment.content)
     .appendTo(newCommentDiv);
-    newCommentDiv.appendTo(#commentSection);
+    newCommentDiv.appendTo("#comment-section");
 }
 
 function handleFetchError(exception)

@@ -49,7 +49,7 @@ public class DataServlet extends HttpServlet {
       String content = request.getParameter("content");
       Comment comment = new Comment(name, content);
       datastoreInterface.addComment(comment);
-      response.sendRedirect("/index.html#commentSection");
+      response.sendRedirect("/index.html#comment-section");
   }
 
   private String commentsToJson(){
