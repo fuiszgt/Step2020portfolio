@@ -16,6 +16,8 @@ package com.google.sps.data;
 
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
+import com.googlecode.objectify.annotation.Index;
+import java.util.Date;
 
 @Entity
 public class Comment{
@@ -23,15 +25,13 @@ public class Comment{
     private Long id;
     private String name;
     private String content;
-    public Comment(Long id, String name, String content){
-        this.id = id;
-        this.name = name;
-        this.content = content;
-    }
+    @Index
+    private Date date;
 
     public Comment(String name, String content){
         this.name = name;
         this.content = content;
+        this.date = new Date();
     }
 
     public Comment(){}
