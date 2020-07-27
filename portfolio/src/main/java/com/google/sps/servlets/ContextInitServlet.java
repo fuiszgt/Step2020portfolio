@@ -12,21 +12,20 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package com.google.sps.interfaces;
+package com.google.sps.servlets;
 
-import java.util.List;
+import javax.servlet.ServletContextEvent;
+import javax.servlet.ServletContextListener;
+import javax.servlet.annotation.WebListener;
+import com.googlecode.objectify.ObjectifyService;
 import com.google.sps.data.Comment;
-import static com.googlecode.objectify.ObjectifyService.ofy;
 
-public class DatastoreInterface{
+@WebListener
+public class ContextInitServlet implements ServletContextListener {
 
-    public void addComment(Comment comment){
-        ofy().save().entity(comment).now();
-    }
-    
-    public List<Comment> getComments(){
-        List<Comment> comments = ofy().load().type(Comment.class).list();
-        return comments; 
-    }
-       
+  @Override
+  public void contextInitialized(ServletContextEvent servletContextEvent) {
+    ObjectifyService.init();
+    ObjectifyService.register(Comment.class);
+  }
 }

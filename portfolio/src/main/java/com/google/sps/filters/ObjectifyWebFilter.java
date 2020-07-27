@@ -12,21 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package com.google.sps.interfaces;
+import javax.servlet.annotation.WebFilter;
+import com.googlecode.objectify.ObjectifyFilter;
 
-import java.util.List;
-import com.google.sps.data.Comment;
-import static com.googlecode.objectify.ObjectifyService.ofy;
-
-public class DatastoreInterface{
-
-    public void addComment(Comment comment){
-        ofy().save().entity(comment).now();
-    }
-    
-    public List<Comment> getComments(){
-        List<Comment> comments = ofy().load().type(Comment.class).list();
-        return comments; 
-    }
-       
-}
+@WebFilter(urlPatterns = {"/*"})
+public class ObjectifyWebFilter extends ObjectifyFilter {}
