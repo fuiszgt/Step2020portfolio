@@ -1,8 +1,17 @@
 function initComments()
 {
     fetchData()
-    .then((comments) => addCommentsToDOM(comments))
+    .then((comment) => addCommentsToDOM(comments))
     .catch((error) => handleFetchError(error));
+}
+
+function authenticateView(isUserLoggedIn){
+    if(isUserLoggedIn){
+        $("#new-comment-form").show();
+        $("#toggle-login").html("Logout");
+    }else{
+        $("#toggle-login").html("Login");
+    }
 }
 
 function addCommentsToDOM(comments)
