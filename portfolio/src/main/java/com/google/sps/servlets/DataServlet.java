@@ -24,6 +24,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.core.MediaType;
+import com.google.appengine.api.users.UserService;
+import com.google.appengine.api.users.UserServiceFactory;
 
 
 @WebServlet("/data")
@@ -31,11 +33,22 @@ public class DataServlet extends HttpServlet {
 
   private Gson gson = new Gson();
   private DatastoreInterface datastoreInterface = new DatastoreInterface();
+  private UserService userService = UserServiceFactory.getUserService();
+
+  private class DataPackage {
+      private boolean isUserLoggedIn;
+      private List<Comment> comments;
+      DataPackage(){
+          this.isUserLoggedIn = DataServlet.this.userService.isUserLoggedIn();
+          this.comments = DataServlet.this.datastoreInterface.getComments();
+      }
+
+  }
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     response.setContentType(MediaType.APPLICATION_JSON);
-    String json = commentsToJson();
+    String json = dataToJson();
     response.getWriter().println(json);
   }
 
@@ -49,9 +62,9 @@ public class DataServlet extends HttpServlet {
       response.sendRedirect("/index.html#comment-section");
   }
 
-  private String commentsToJson(){
-    List<Comment> comments = datastoreInterface.getComments();
-    String json = gson.toJson(comments);
+  private String dataToJson(){
+    DataPackage dataPackage = new DataPackage();
+    String json = gson.toJson(dataPackage);
     return json;
   }
 }
