@@ -25,7 +25,7 @@ public class DatastoreInterface{
     }
     
     public List<Comment> getComments(){
-        List<Comment> comments = ofy().load().type(Comment.class).list();
+        List<Comment> comments = ofy().load().type(Comment.class).order("date").list();
         return comments; 
     }
        
