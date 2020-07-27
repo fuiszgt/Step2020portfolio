@@ -55,11 +55,15 @@ public class DataServlet extends HttpServlet {
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
       //TODO: use GSON deserialization
-      String name = request.getParameter("name");
-      String content = request.getParameter("content");
-      Comment comment = new Comment(name, content);
-      datastoreInterface.addComment(comment);
-      response.sendRedirect("/index.html#comment-section");
+      if(userService.isUserLoggedIn()){
+        String name = request.getParameter("name");
+        String content = request.getParameter("content");
+        Comment comment = new Comment(name, content);
+        datastoreInterface.addComment(comment);
+        response.sendRedirect("/index.html#comment-section");
+      }else{
+        response.sendRedirect("/login");
+      }
   }
 
   private String dataToJson(){
