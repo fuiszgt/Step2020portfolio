@@ -14,7 +14,6 @@
 
 package com.google.sps.servlets;
 
-import java.io.*;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
@@ -26,7 +25,6 @@ public class ContextInitServlet implements ServletContextListener {
 
   @Override
   public void contextInitialized(ServletContextEvent servletContextEvent) {
-    System.out.println("Initialize ObjectifyService...");
     ObjectifyService.init();
     ObjectifyService.register(Comment.class);
   }

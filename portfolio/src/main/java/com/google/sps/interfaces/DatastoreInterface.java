@@ -14,8 +14,7 @@
 
 package com.google.sps.interfaces;
 
-import java.io.*;
-import java.util.*;
+import java.util.List;
 import com.google.sps.data.Comment;
 import static com.googlecode.objectify.ObjectifyService.ofy;
 

@@ -34,9 +34,7 @@ public class Comment{
         this.content = content;
     }
 
-    public Comment(){
-        
-    }
+    public Comment(){}
 
     public Long getId(){
         return this.id;
