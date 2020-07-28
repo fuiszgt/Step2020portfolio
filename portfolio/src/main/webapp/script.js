@@ -21,13 +21,8 @@ $(document).ready(init);
 function init(){
   initCardImgs();
   initClickHandlers();
-  fetchData()
-  .then((data) => {
-      addCommentsToDOM(data.comments);
-      authenticateView(data.isUserLoggedIn);
-      })
-
-  .catch((error) => handleFetchError(error));
+  initAuth();
+  initComments();
 }
 
 function initCardImgs(){

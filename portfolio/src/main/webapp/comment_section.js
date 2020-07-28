@@ -1,18 +1,10 @@
 function initComments()
 {
-    fetchData()
-    .then((comment) => addCommentsToDOM(comments))
-    .catch((error) => handleFetchError(error));
+    fetchData("/data")
+    .then((comments) => addCommentsToDOM(comments.comments));
 }
 
-function authenticateView(isUserLoggedIn){
-    if(isUserLoggedIn){
-        $("#new-comment-form").show();
-        $("#toggle-login").html("Logout");
-    }else{
-        $("#toggle-login").html("Login");
-    }
-}
+
 
 function addCommentsToDOM(comments)
 {
@@ -34,19 +26,3 @@ function addSingleComment(comment){
     newCommentDiv.appendTo("#comment-section");
 }
 
-function handleFetchError(exception)
-{
-    console.error(exception);
-}
-
-function fetchData() {
-    return fetch("/data")
-    .then((response) => 
-    {
-        if(!response.ok)
-        {
-            throw new Error('Network error detected');
-        }
-        return response.json();
-    });
-}
