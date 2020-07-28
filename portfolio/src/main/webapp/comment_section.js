@@ -1,7 +1,7 @@
 function initComments()
 {
-    fetchData("/data")
-    .then((comments) => addCommentsToDOM(comments.comments));
+    fetchData("/load_comments")
+    .then((comments) => addCommentsToDOM(comments));
 }
 
 

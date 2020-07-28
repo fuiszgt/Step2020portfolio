@@ -35,7 +35,7 @@ public class LoginServlet extends HttpServlet {
       private String url;
       private LoginInfo(UserService userService){
           this.isLoggedIn = userService.isUserLoggedIn();
-          String returnUrl = "/";
+          String returnUrl = "/index.html#comment-section";
           if(this.isLoggedIn){
               this.url = userService.createLogoutURL(returnUrl);
           }else{

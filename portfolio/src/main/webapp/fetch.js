@@ -8,7 +8,7 @@ function fetchData(url) {
         }
         return response.json();
     })
-    .catch((error) => handleFetchError(error));
+    .catch((error) => handleFetchError(error)); //I think this should catch errors, but I am not entirely sure.
 }
 
 function handleFetchError(exception)
