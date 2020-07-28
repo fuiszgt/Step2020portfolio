@@ -19,30 +19,41 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import javax.ws.rs.core.MediaType;
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
+import com.google.gson.Gson;
+import com.google.sps.interfaces.DatastoreInterface;
 
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
 
+  private Gson gson = new Gson();
+  private DatastoreInterface datastoreInterface = new DatastoreInterface();
+  private class LoginInfo{
+      private boolean isLoggedIn;
+      private String url;
+      private LoginInfo(UserService userService){
+          this.isLoggedIn = userService.isUserLoggedIn();
+          String returnUrl = "/";
+          if(this.isLoggedIn){
+              this.url = userService.createLogoutURL(returnUrl);
+          }else{
+              this.url = userService.createLoginURL(returnUrl);
+          }
+      }
+
+      private String toJSON(){
+          return LoginServlet.this.gson.toJson(this);
+      }
+  }
+
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    response.setContentType("text/html");
-
+    response.setContentType(MediaType.APPLICATION_JSON);
     UserService userService = UserServiceFactory.getUserService();
-    if (userService.isUserLoggedIn()) {
-      String userEmail = userService.getCurrentUser().getEmail();
-      String urlToRedirectToAfterUserLogsOut = "/";
-      String logoutUrl = userService.createLogoutURL(urlToRedirectToAfterUserLogsOut);
-
-      response.getWriter().println("<p>Hello " + userEmail + "!</p>");
-      response.getWriter().println("<p>Logout <a href=\"" + logoutUrl + "\">here</a>.</p>");
-    } else {
-      String urlToRedirectToAfterUserLogsIn = "/";
-      String loginUrl = userService.createLoginURL(urlToRedirectToAfterUserLogsIn);
-
-      response.getWriter().println("<p>Hello stranger.</p>");
-      response.getWriter().println("<p>Login <a href=\"" + loginUrl + "\">here</a>.</p>");
-    }
+    LoginInfo loginInfo = new LoginInfo(userService);
+    String loginJSON = loginInfo.toJSON();
+    response.getWriter().println(loginJSON);
   }
 }
