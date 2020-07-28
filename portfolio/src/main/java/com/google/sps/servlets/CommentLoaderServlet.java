@@ -29,7 +29,7 @@ import com.google.appengine.api.users.UserServiceFactory;
 
 
 @WebServlet("/data")
-public class DataServlet extends HttpServlet {
+public class CommentLoaderServlet extends HttpServlet {
 
   private Gson gson = new Gson();
   private DatastoreInterface datastoreInterface = new DatastoreInterface();
