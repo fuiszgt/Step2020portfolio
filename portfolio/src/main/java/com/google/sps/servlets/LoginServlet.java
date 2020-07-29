@@ -24,37 +24,20 @@ import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 import com.google.gson.Gson;
 import com.google.sps.interfaces.DatastoreInterface;
+import com.google.sps.controllers.Authenticator;
+import com.google.sps.data.LoginInfo;
 
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
 
-  private static final String RETURN_URL = "/index.html#comment-section";
   private Gson gson = new Gson();
   private DatastoreInterface datastoreInterface = new DatastoreInterface();
-  
-  private class LoginInfo{
-      private boolean isLoggedIn;
-      private boolean hasNick;
-      private String nick;
-      private String url;
-      
-      private LoginInfo(UserService userService){
-          this.isLoggedIn = userService.isUserLoggedIn();
-          if(this.isLoggedIn){
-              this.url = userService.createLogoutURL(RETURN_URL);
-              this.nick = LoginServlet.this.datastoreInterface.getUserNick(userService.getCurrentUser().getUserId());
-          }else{
-              this.url = userService.createLoginURL(RETURN_URL);
-          }
-      }
-
-  }
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     response.setContentType(MediaType.APPLICATION_JSON);
-    UserService userService = UserServiceFactory.getUserService();
-    LoginInfo loginInfo = new LoginInfo(userService);
+    Authenticator authenticator = new Authenticator();
+    LoginInfo loginInfo = authenticator.getLoginInfo();
     String loginJSON = gson.toJson(loginInfo);
     response.getWriter().println(loginJSON);
   }

@@ -32,8 +32,8 @@ public class SetNicknameServlet extends HttpServlet {
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
     UserService userService = UserServiceFactory.getUserService();
-    if(userService.isUserLoggedIn()){
-        String nick = request.getParameter("nick");
+    if(userService.isUserLoggedIn()){ 
+        String nick = request.getParameter("nick"); //TODO: only add if nick is unique
         String uId = userService.getCurrentUser().getUserId(); //TODO: extract this to a variable
         String email = userService.getCurrentUser().getEmail();
         User user = new User(uId, nick, email);
