@@ -4,9 +4,7 @@
     <meta charset="UTF-8">
     <title>Gábor Fuisz - 2020 STEP Internship Portfolio</title>
     <link rel="stylesheet" href="style.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="comment_section.js"></script>
-    <script src="script.js"></script>
+    
   </head>
   <body>
 
@@ -87,7 +85,7 @@
     </div>
     <div id="comment-section" class="full-page">
         <h1>Comments</h1>
-         <form action="/data" method="POST">
+         <form id="new-comment-form" action="/add_comment" method="POST">
             <span>Your name: </span>
             <input type="text" name="name">
             <br>
@@ -95,6 +93,13 @@
             <textarea  name="content"></textarea><br>
             <input type="submit" value="Comment"/>
          </form>
+         <a href="/login" id="toggle-login"></a>
     </div>
   </body>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write('<script src="/jquery-3.5.1.min.js"><\/script>')</script>
+  <script src="/script.js"></script>
+  <script src="/fetch.js"></script>
+  <script src="/comment_section.js"></script>
+  <script src="/authentication.js"></script>
 </html>

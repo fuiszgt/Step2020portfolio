@@ -21,6 +21,7 @@ $(document).ready(init);
 function init(){
   initCardImgs();
   initClickHandlers();
+  initAuth();
   initComments();
 }
 

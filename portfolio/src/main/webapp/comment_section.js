@@ -1,9 +1,10 @@
 function initComments()
 {
-    fetchData()
-    .then((comments) => addCommentsToDOM(comments))
-    .catch((error) => handleFetchError(error));
+    fetchData("/load_comments")
+    .then((comments) => addCommentsToDOM(comments));
 }
+
+
 
 function addCommentsToDOM(comments)
 {
@@ -25,19 +26,3 @@ function addSingleComment(comment){
     newCommentDiv.appendTo("#comment-section");
 }
 
-function handleFetchError(exception)
-{
-    console.error(exception);
-}
-
-function fetchData() {
-    return fetch("/data")
-    .then((response) => 
-    {
-        if(!response.ok)
-        {
-            throw new Error('Network error detected');
-        }
-        return response.json();
-    });
-}

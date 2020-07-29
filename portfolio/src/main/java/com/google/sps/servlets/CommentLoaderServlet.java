@@ -14,7 +14,7 @@
 
 package com.google.sps.servlets;
 
-import java.util.*;
+import java.util.List;
 import com.google.sps.data.Comment;
 import com.google.sps.interfaces.DatastoreInterface;
 import com.google.gson.Gson;
@@ -25,9 +25,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.core.MediaType;
 
-
-@WebServlet("/data")
-public class DataServlet extends HttpServlet {
+@WebServlet("/load_comments")
+public class CommentLoaderServlet extends HttpServlet {
 
   private Gson gson = new Gson();
   private DatastoreInterface datastoreInterface = new DatastoreInterface();
@@ -35,23 +34,13 @@ public class DataServlet extends HttpServlet {
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     response.setContentType(MediaType.APPLICATION_JSON);
-    String json = commentsToJson();
-    response.getWriter().println(json);
-  }
-
-  @Override
-  public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-      //TODO: use GSON deserialization
-      String name = request.getParameter("name");
-      String content = request.getParameter("content");
-      Comment comment = new Comment(name, content);
-      datastoreInterface.addComment(comment);
-      response.sendRedirect("/index.html#comment-section");
+    String commentsJSON = commentsToJson();
+    response.getWriter().println(commentsJSON);
   }
 
   private String commentsToJson(){
     List<Comment> comments = datastoreInterface.getComments();
-    String json = gson.toJson(comments);
-    return json;
+    String commentsJSON = gson.toJson(comments);
+    return commentsJSON;
   }
 }
