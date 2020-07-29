@@ -32,7 +32,6 @@ public class CommentCreatorServlet extends HttpServlet {
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
     UserService userService = UserServiceFactory.getUserService();
-    //TODO: use GSON deserialization
     if(userService.isUserLoggedIn()){
         String name = request.getParameter("name");
         String content = request.getParameter("content");

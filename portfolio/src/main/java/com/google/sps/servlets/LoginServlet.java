@@ -28,24 +28,23 @@ import com.google.sps.interfaces.DatastoreInterface;
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
 
+  private static final String RETURN_URL = "/index.html#comment-section";
   private Gson gson = new Gson();
   private DatastoreInterface datastoreInterface = new DatastoreInterface();
+  
   private class LoginInfo{
       private boolean isLoggedIn;
       private String url;
       private LoginInfo(UserService userService){
           this.isLoggedIn = userService.isUserLoggedIn();
-          String returnUrl = "/index.html#comment-section";
+          
           if(this.isLoggedIn){
-              this.url = userService.createLogoutURL(returnUrl);
+              this.url = userService.createLogoutURL(RETURN_URL);
           }else{
-              this.url = userService.createLoginURL(returnUrl);
+              this.url = userService.createLoginURL(RETURN_URL);
           }
       }
 
-      private String toJSON(){
-          return LoginServlet.this.gson.toJson(this);
-      }
   }
 
   @Override
@@ -53,7 +52,7 @@ public class LoginServlet extends HttpServlet {
     response.setContentType(MediaType.APPLICATION_JSON);
     UserService userService = UserServiceFactory.getUserService();
     LoginInfo loginInfo = new LoginInfo(userService);
-    String loginJSON = loginInfo.toJSON();
+    String loginJSON = gson.toJson(loginInfo);
     response.getWriter().println(loginJSON);
   }
 }
