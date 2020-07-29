@@ -19,6 +19,7 @@ import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 import com.googlecode.objectify.ObjectifyService;
 import com.google.sps.data.Comment;
+import com.google.sps.data.User;
 
 @WebListener
 public class ContextInitServlet implements ServletContextListener {
@@ -27,5 +28,6 @@ public class ContextInitServlet implements ServletContextListener {
   public void contextInitialized(ServletContextEvent servletContextEvent) {
     ObjectifyService.init();
     ObjectifyService.register(Comment.class);
+    ObjectifyService.register(User.class);
   }
 }

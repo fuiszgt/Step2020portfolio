@@ -16,9 +16,14 @@ package com.google.sps.interfaces;
 
 import java.util.List;
 import com.google.sps.data.Comment;
+import com.google.sps.data.User;
 import static com.googlecode.objectify.ObjectifyService.ofy;
 
 public class DatastoreInterface{
+
+    public void addUser(User user){
+        ofy().save().entity(user).now();
+    }
 
     public void addComment(Comment comment){
         ofy().save().entity(comment).now();
