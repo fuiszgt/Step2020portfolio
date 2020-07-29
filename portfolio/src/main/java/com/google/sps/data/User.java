@@ -21,7 +21,6 @@ import com.googlecode.objectify.annotation.Index;
 @Entity
 public class User{
     @Id
-    private Long id;
     private String uId;
     private String nick;
     private String email;
@@ -34,9 +33,9 @@ public class User{
 
     public User(){}
 
-    public Long getId(){
-        return this.id;
-    }
+    // public Long getId(){
+    //     return this.id;
+    // }
     public String getUId(){
         return this.uId;
     }

@@ -34,12 +34,15 @@ public class LoginServlet extends HttpServlet {
   
   private class LoginInfo{
       private boolean isLoggedIn;
+      private boolean hasNick;
+      private String nick;
       private String url;
+      
       private LoginInfo(UserService userService){
           this.isLoggedIn = userService.isUserLoggedIn();
-          
           if(this.isLoggedIn){
               this.url = userService.createLogoutURL(RETURN_URL);
+              this.nick = LoginServlet.this.datastoreInterface.getUserNick(userService.getCurrentUser().getUserId());
           }else{
               this.url = userService.createLoginURL(RETURN_URL);
           }

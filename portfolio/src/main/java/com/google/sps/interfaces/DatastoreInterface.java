@@ -25,6 +25,15 @@ public class DatastoreInterface{
         ofy().save().entity(user).now();
     }
 
+    public String getUserNick(String userId){
+        User querriedUser = ofy().load().type(User.class).id(userId).now();
+        if(querriedUser != null){
+            return querriedUser.getNick();
+        }else{
+            return null;
+        }
+    }
+
     public void addComment(Comment comment){
         ofy().save().entity(comment).now();
     }
