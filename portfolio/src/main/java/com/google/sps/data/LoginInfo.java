@@ -14,7 +14,7 @@
 
 package com.google.sps.data;
 
-public class LoginInfo{ //TODO; Pojoify
+public class LoginInfo{ //TODO: Pojoify
       public boolean isLoggedIn;
       public boolean hasNick;
       public String nick;

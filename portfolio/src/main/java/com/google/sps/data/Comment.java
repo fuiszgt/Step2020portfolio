@@ -14,24 +14,34 @@
 
 package com.google.sps.data;
 
+import static com.googlecode.objectify.ObjectifyService.ofy;
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
 import com.googlecode.objectify.annotation.Index;
+import com.googlecode.objectify.annotation.OnLoad;
+import com.googlecode.objectify.annotation.Load;
+import com.googlecode.objectify.Key;
+import com.googlecode.objectify.Ref;
 import java.util.Date;
 
 @Entity
 public class Comment{
     @Id
     private Long id;
-    private String name;
+    private transient String uId;
+    private String nick;
     private String content;
     @Index
     private Date date;
+    @Load 
+    private Ref<User> user;
 
-    public Comment(String name, String content){
-        this.name = name;
+    public Comment(String uId, String content){
+        this.uId = uId;
         this.content = content;
         this.date = new Date();
+        Key<User> userKey = Key.create(User.class, uId);
+        this.user = Ref.create(userKey);
     }
 
     public Comment(){}
@@ -39,11 +49,18 @@ public class Comment{
     public Long getId(){
         return this.id;
     }
-    public String getName(){
-        return this.name;
-    }
+
     public String getContent(){
         return this.content;
+    }
+
+    @OnLoad
+    public void setNick(){ 
+        if(this.user.get() != null){
+            this.nick = this.user.get().getNick();
+        }else{
+            this.nick = null;
+        }
     }
     
 }

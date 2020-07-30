@@ -37,9 +37,9 @@ public class CommentCreatorServlet extends HttpServlet {
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
     LoginInfo loginInfo = authenticator.getLoginInfo();
     if(loginInfo.isLoggedIn){ //TODO: check also if has nickname
-        String name =  datastoreInterface.getUserNick(authenticator.getUId());
+        String uId =  authenticator.getUId();
         String content = request.getParameter("content");
-        Comment comment = new Comment(name, content);
+        Comment comment = new Comment(uId, content);
         datastoreInterface.addComment(comment);
     }
     response.sendRedirect("/index.html#comment-section");

@@ -15,7 +15,7 @@ function addSingleComment(comment){
     id = comment.id;
     newCommentDiv = $("<div></div>", {"id": id});
     $("<p></p>").addClass("name")
-    .html(comment.name)
+    .html(comment.nick)
     .appendTo(newCommentDiv);
     $("<span></span>").addClass("date")
     .html(comment.date)
