@@ -22,28 +22,27 @@ import com.googlecode.objectify.annotation.Ignore;
 import com.googlecode.objectify.annotation.Load;
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.Ref;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonGetter;
 import java.util.Date;
 
 @Entity
 public class Comment{
     @Id
     private Long id;
-    private transient String uId;
-    @Ignore
-    private String nick;
+    private transient String userId;
     private String content;
     @Index
     private Date date;
     @Load 
-    private Ref<User> user;
+    private transient Ref<User> user;
 
-    public Comment(String uId, String content){
-        this.uId = uId;
+    public Comment(String userId, String content){
+        this.userId = userId;
         this.content = content;
         this.date = new Date();
-        Key<User> userKey = Key.create(User.class, uId);
+        Key<User> userKey = Key.create(User.class, userId);
         this.user = Ref.create(userKey);
-        this.setNick();
     }
 
     public Comment(){}
@@ -56,12 +55,21 @@ public class Comment{
         return this.content;
     }
 
-    @OnLoad
-    public void setNick(){ 
+    public Date getDate(){
+        return this.date;
+    }
+
+    @JsonGetter("date")
+    public String getDateAsString(){
+        return this.date.toString();
+    }
+
+    @JsonGetter("nick")
+    public String getNick(){
         if(this.user.get() != null){
-            this.nick = this.user.get().getNick();
+            return this.user.get().getNick();
         }else{
-            this.nick = null;
+            return null;
         }
     }
     

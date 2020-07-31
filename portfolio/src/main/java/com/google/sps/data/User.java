@@ -21,21 +21,21 @@ import com.googlecode.objectify.annotation.Index;
 @Entity
 public class User{
     @Id
-    private String uId;
+    private String userId;
     @Index
     private String nick;
     private String email;
 
-    public User(String uId, String nick, String email){
-        this.uId = uId;
+    public User(String userId, String nick, String email){
+        this.userId = userId;
         this.nick = nick;
         this.email = email;
     }
 
     public User(){}
     
-    public String getUId(){
-        return this.uId;
+    public String getUserId(){
+        return this.userId;
     }
     public String getNick(){
         return this.nick;

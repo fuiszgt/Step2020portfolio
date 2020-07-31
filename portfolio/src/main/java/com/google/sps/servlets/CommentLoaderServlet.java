@@ -18,6 +18,8 @@ import java.util.List;
 import com.google.sps.data.Comment;
 import com.google.sps.interfaces.DatastoreInterface;
 import com.google.gson.Gson;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import java.io.IOException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -29,6 +31,7 @@ import javax.ws.rs.core.MediaType;
 public class CommentLoaderServlet extends HttpServlet {
 
   private Gson gson = new Gson();
+  private ObjectMapper objectMapper = new ObjectMapper();
   private DatastoreInterface datastoreInterface = new DatastoreInterface();
 
   @Override
@@ -40,7 +43,12 @@ public class CommentLoaderServlet extends HttpServlet {
 
   private String commentsToJson(){
     List<Comment> comments = datastoreInterface.getComments();
-    String commentsJSON = gson.toJson(comments);
-    return commentsJSON;
+    try{
+        String commentsJSON =  objectMapper.writeValueAsString(comments);
+        return commentsJSON;
+    }catch(JsonProcessingException e){
+        return "";
+    }
+    
   }
 }
