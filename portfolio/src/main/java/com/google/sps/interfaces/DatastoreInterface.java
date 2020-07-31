@@ -14,6 +14,7 @@
 
 package com.google.sps.interfaces;
 
+import java.io.*; 
 import java.util.List;
 import com.google.sps.data.Comment;
 import com.google.sps.data.User;
@@ -21,8 +22,12 @@ import static com.googlecode.objectify.ObjectifyService.ofy;
 
 public class DatastoreInterface{
 
-    public void addUser(User user){
-        ofy().save().entity(user).now();
+    public boolean addUser(User user){
+        if(!isNickTaken(user.getNick())){
+            ofy().save().entity(user).now();
+            return true;
+        }
+        return false;
     }
 
     public String getUserNick(String userId){
@@ -32,6 +37,12 @@ public class DatastoreInterface{
         }else{
             return null;
         }
+    }
+
+    public boolean isNickTaken(String nick){
+        User existing = ofy().load().type(User.class).filter("nick", nick).first().now();
+        System.out.println(existing);
+        return (existing != null);
     }
 
     public void addComment(Comment comment){

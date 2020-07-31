@@ -43,6 +43,11 @@
         <artifactId>objectify</artifactId>
         <version>6.0.6</version>
     </dependency>
+    <dependency>
+        <groupId>org.json</groupId>
+        <artifactId>org.json</artifactId>
+        <version>chargebee-1.0</version>
+    </dependency>   
   </dependencies>
 
   <build>

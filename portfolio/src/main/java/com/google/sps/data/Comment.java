@@ -14,11 +14,11 @@
 
 package com.google.sps.data;
 
-import static com.googlecode.objectify.ObjectifyService.ofy;
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
 import com.googlecode.objectify.annotation.Index;
 import com.googlecode.objectify.annotation.OnLoad;
+import com.googlecode.objectify.annotation.Ignore;
 import com.googlecode.objectify.annotation.Load;
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.Ref;
@@ -29,6 +29,7 @@ public class Comment{
     @Id
     private Long id;
     private transient String uId;
+    @Ignore
     private String nick;
     private String content;
     @Index
@@ -42,6 +43,7 @@ public class Comment{
         this.date = new Date();
         Key<User> userKey = Key.create(User.class, uId);
         this.user = Ref.create(userKey);
+        this.setNick();
     }
 
     public Comment(){}

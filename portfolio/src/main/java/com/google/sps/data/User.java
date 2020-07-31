@@ -22,6 +22,7 @@ import com.googlecode.objectify.annotation.Index;
 public class User{
     @Id
     private String uId;
+    @Index
     private String nick;
     private String email;
 
