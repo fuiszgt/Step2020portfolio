@@ -12,22 +12,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package com.google.sps.servlets;
+package com.google.sps.data;
 
-import javax.servlet.ServletContextEvent;
-import javax.servlet.ServletContextListener;
-import javax.servlet.annotation.WebListener;
-import com.googlecode.objectify.ObjectifyService;
-import com.google.sps.data.Comment;
-import com.google.sps.data.User;
+public class LoginInfo{ //TODO: Pojoify
+      public boolean isLoggedIn;
+      public boolean hasNick;
+      public String nick;
+      public String logoutUrl;
+      public String loginUrl;
 
-@WebListener
-public class ContextInitServlet implements ServletContextListener {
-
-  @Override
-  public void contextInitialized(ServletContextEvent servletContextEvent) {
-    ObjectifyService.init();
-    ObjectifyService.register(Comment.class);
-    ObjectifyService.register(User.class);
   }
-}

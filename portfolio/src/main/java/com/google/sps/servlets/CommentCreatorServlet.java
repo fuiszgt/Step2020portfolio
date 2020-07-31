@@ -15,6 +15,8 @@
 package com.google.sps.servlets;
 
 import com.google.sps.data.Comment;
+import com.google.sps.data.LoginInfo;
+import com.google.sps.controllers.Authenticator;
 import com.google.sps.interfaces.DatastoreInterface;
 import javax.servlet.annotation.WebServlet;
 import java.io.IOException;
@@ -24,19 +26,23 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+
 @WebServlet("/add_comment")
 public class CommentCreatorServlet extends HttpServlet {
 
   private DatastoreInterface datastoreInterface = new DatastoreInterface();
-  
+  private Authenticator authenticator = new Authenticator();
+ 
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    UserService userService = UserServiceFactory.getUserService();
-    if(userService.isUserLoggedIn()){
-        String name = request.getParameter("name");
-        String content = request.getParameter("content");
-        Comment comment = new Comment(name, content);
-        datastoreInterface.addComment(comment);
+    LoginInfo loginInfo = authenticator.getLoginInfo();
+    if(loginInfo.isLoggedIn){ 
+        if(loginInfo.hasNick){
+            String uId =  authenticator.getUId();
+            String content = request.getParameter("content");
+            Comment comment = new Comment(uId, content);
+            datastoreInterface.addComment(comment);
+        }
     }
     response.sendRedirect("/index.html#comment-section");
   }

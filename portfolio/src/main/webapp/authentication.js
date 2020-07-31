@@ -5,10 +5,13 @@ function initAuth(){
 
 function authenticateView(loginInfo){
     if(loginInfo.isLoggedIn){
-        $("#new-comment-form").show();
-        $("#toggle-login").html("Logout").attr("href", loginInfo.url);
-
+        $("#toggle-login").html("Logout").attr("href", loginInfo.logoutUrl);
+        if(loginInfo.hasNick){
+            validatedNick(loginInfo.nick);
+        }else{
+            askForNick();
+        }
     }else{
-        $("#toggle-login").html("Login").attr("href", loginInfo.url);
+        $("#toggle-login").html("Login").attr("href", loginInfo.loginUrl);
     }
 }

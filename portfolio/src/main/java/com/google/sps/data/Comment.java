@@ -17,21 +17,32 @@ package com.google.sps.data;
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
 import com.googlecode.objectify.annotation.Index;
+import com.googlecode.objectify.annotation.OnLoad;
+import com.googlecode.objectify.annotation.Ignore;
+import com.googlecode.objectify.annotation.Load;
+import com.googlecode.objectify.Key;
+import com.googlecode.objectify.Ref;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonGetter;
 import java.util.Date;
 
 @Entity
 public class Comment{
     @Id
     private Long id;
-    private String name;
+    private transient String userId;
     private String content;
     @Index
     private Date date;
+    @Load 
+    private transient Ref<User> user;
 
-    public Comment(String name, String content){
-        this.name = name;
+    public Comment(String userId, String content){
+        this.userId = userId;
         this.content = content;
         this.date = new Date();
+        Key<User> userKey = Key.create(User.class, userId);
+        this.user = Ref.create(userKey);
     }
 
     public Comment(){}
@@ -39,11 +50,27 @@ public class Comment{
     public Long getId(){
         return this.id;
     }
-    public String getName(){
-        return this.name;
-    }
+
     public String getContent(){
         return this.content;
+    }
+
+    public Date getDate(){
+        return this.date;
+    }
+
+    @JsonGetter("date")
+    public String getDateAsString(){
+        return this.date.toString();
+    }
+
+    @JsonGetter("nick")
+    public String getNick(){
+        if(this.user.get() != null){
+            return this.user.get().getNick();
+        }else{
+            return null;
+        }
     }
     
 }

@@ -85,13 +85,16 @@
     </div>
     <div id="comment-section" class="full-page">
         <h1>Comments</h1>
+        <div id="greeting">Hello there!</div>
          <form id="new-comment-form" action="/add_comment" method="POST">
-            <span>Your name: </span>
-            <input type="text" name="name">
-            <br>
             <span>Your comment: </span><br>
             <textarea  name="content"></textarea><br>
             <input type="submit" value="Comment"/>
+         </form>
+         <form id="nickname-form">
+             Set a nickname to comment:
+             <input type="text" name="nick">
+             <input type="button" value="Set your nickname" onclick="set_nickname()"/>
          </form>
          <a href="/login" id="toggle-login"></a>
     </div>
@@ -101,5 +104,6 @@
   <script src="/script.js"></script>
   <script src="/fetch.js"></script>
   <script src="/comment_section.js"></script>
+  <script src="/nickname.js"></script>
   <script src="/authentication.js"></script>
 </html>
