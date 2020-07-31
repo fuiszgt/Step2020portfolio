@@ -18,6 +18,7 @@ public class LoginInfo{ //TODO: Pojoify
       public boolean isLoggedIn;
       public boolean hasNick;
       public String nick;
-      public String url;
+      public String logoutUrl;
+      public String loginUrl;
 
   }

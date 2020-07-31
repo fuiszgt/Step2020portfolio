@@ -33,10 +33,12 @@ public class Authenticator{
         LoginInfo loginInfo = new LoginInfo();
         loginInfo.isLoggedIn = userService.isUserLoggedIn();
           if(loginInfo.isLoggedIn){
-              loginInfo.url = userService.createLogoutURL(RETURN_URL);
-              loginInfo.nick = datastoreInterface.getUserNick(userService.getCurrentUser().getUserId());
+                com.google.appengine.api.users.User apiUser = userService.getCurrentUser();
+              loginInfo.logoutUrl= userService.createLogoutURL(RETURN_URL);
+              loginInfo.nick = datastoreInterface.getUserNick(apiUser.getUserId());
+              loginInfo.hasNick = loginInfo.nick != null;
           }else{
-              loginInfo.url = userService.createLoginURL(RETURN_URL);
+              loginInfo.loginUrl = userService.createLoginURL(RETURN_URL);
           }
         return loginInfo;
     }

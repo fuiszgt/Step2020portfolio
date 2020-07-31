@@ -14,7 +14,6 @@
 
 package com.google.sps.interfaces;
 
-import java.io.*; 
 import java.util.List;
 import com.google.sps.data.Comment;
 import com.google.sps.data.User;
@@ -41,7 +40,6 @@ public class DatastoreInterface{
 
     public boolean isNickTaken(String nick){
         User existing = ofy().load().type(User.class).filter("nick", nick).first().now();
-        System.out.println(existing);
         return (existing != null);
     }
 

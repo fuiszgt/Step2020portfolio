@@ -18,10 +18,11 @@ function isNickTaken(response){
 }
 
 function indicateTakenNick(nick){
-    $("#nickname-form").append("The nickname " + nick + "is already taken");
+    $("#nickname-form").append("The nickname " + nick + " is already taken");
 }
 
 function validatedNick(nick){
     $("#greeting").html("Hello " + nick);
+    $("#new-comment-form").show();
     $("#nickname-form").hide();
 }

@@ -33,10 +33,7 @@ public class User{
     }
 
     public User(){}
-
-    // public Long getId(){
-    //     return this.id;
-    // }
+    
     public String getUId(){
         return this.uId;
     }
