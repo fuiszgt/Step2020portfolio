@@ -46,7 +46,15 @@ public class DatastoreInterface{
     public void addComment(Comment comment){
         ofy().save().entity(comment).now();
     }
+
+    public void deleteCommentById(Long id){
+        ofy().delete().type(Comment.class).id(id).now();
+    }
     
+    public Comment getSingleComment(Long id){
+        return ofy().load().type(Comment.class).id(id).now();
+    }
+
     public List<Comment> getComments(){
         List<Comment> comments = ofy().load().type(Comment.class).order("date").list();
         return comments; 

@@ -96,6 +96,11 @@
              <input type="text" name="nick">
              <input type="button" value="Set your nickname" onclick="set_nickname()"/>
          </form>
+         <form id="delete-comment" action="/delete_comment" method="POST">
+             Delete a comment by id
+             <input type="text" name="id">
+             <input type="submit" value="Delete your comment"/>
+         </form>
          <a href="/login" id="toggle-login"></a>
     </div>
   </body>

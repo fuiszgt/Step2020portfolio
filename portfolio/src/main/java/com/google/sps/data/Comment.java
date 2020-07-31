@@ -30,7 +30,6 @@ import java.util.Date;
 public class Comment{
     @Id
     private Long id;
-    private transient String userId;
     private String content;
     @Index
     private Date date;
@@ -38,7 +37,6 @@ public class Comment{
     private transient Ref<User> user;
 
     public Comment(String userId, String content){
-        this.userId = userId;
         this.content = content;
         this.date = new Date();
         Key<User> userKey = Key.create(User.class, userId);
@@ -68,6 +66,14 @@ public class Comment{
     public String getNick(){
         if(this.user.get() != null){
             return this.user.get().getNick();
+        }else{
+            return null;
+        }
+    }
+
+    public String getUserId(){
+        if(this.user.get() != null){
+            return this.user.get().getUserId();
         }else{
             return null;
         }
