@@ -14,10 +14,42 @@
 
 package com.google.sps;
 
-import java.util.Collection;
+import java.sql.Time;
+import java.util.*;
 
 public final class FindMeetingQuery {
   public Collection<TimeRange> query(Collection<Event> events, MeetingRequest request) {
-    throw new UnsupportedOperationException("TODO: Implement this method.");
+    SortedSet<TimeRange> timeRangesSorted = new TreeSet<TimeRange>(TimeRange.ORDER_BY_START);
+    for(Event e: events){ //some map could be used here
+      if(hasAttendee(e, request.getAttendees())){
+        timeRangesSorted.add(e.getWhen());
+      }
+    }
+
+    TimeRange guardian = TimeRange.fromStartDuration(TimeRange.END_OF_DAY+1, 0); //Shouldn't timerange set outside the minutes of the day be invalid?
+    timeRangesSorted.add(guardian); //Could be done by an additional if at the end as well
+
+    int lastFinish = TimeRange.START_OF_DAY;
+    Collection<TimeRange> appropriateTimeranges = new ArrayList<TimeRange>();
+    for(TimeRange nextEvent: timeRangesSorted){
+      if(lastFinish < nextEvent.start()){ //should I extract nextEvent.start() to a local variable?
+        TimeRange empty = TimeRange.fromStartEnd(lastFinish, nextEvent.start(), false);
+        if(empty.duration() >= request.getDuration()){
+          appropriateTimeranges.add(empty);
+        }
+      }
+      if(lastFinish < nextEvent.end()){
+        lastFinish = nextEvent.end();
+      }
+    }
+
+    return appropriateTimeranges;
+  }
+
+  public boolean hasAttendee(Event event, Collection<String> Attendees){//will it delete the attendees if the event?
+    Collection<String> eventAttendees = new HashSet<String>();
+    eventAttendees.addAll(event.getAttendees());
+    eventAttendees.retainAll(Attendees);
+    return eventAttendees.size() > 0;
   }
 }
