@@ -15,41 +15,57 @@
 package com.google.sps;
 
 import java.sql.Time;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.SortedSet;
+import java.util.TreeSet;
+import java.util.HashSet;
+import java.util.stream.Collectors;
+
+import static java.util.Collections.disjoint;
+
 
 public final class FindMeetingQuery {
+
+  /**
+   * 
+   * */
   public Collection<TimeRange> query(Collection<Event> events, MeetingRequest request) {
-    SortedSet<TimeRange> timeRangesSorted = new TreeSet<TimeRange>(TimeRange.ORDER_BY_START);
-    for(Event e: events){ //some map could be used here
-      if(hasAttendee(e, request.getAttendees())){
-        timeRangesSorted.add(e.getWhen());
-      }
-    }
+
+    long requestedDuration = request.getDuration();
+    //Select all the events that contain mandatory attendee, and add them sorted by start to a sorted set
+    Collection<String> requestedAttendees = request.getAttendees();
+    SortedSet<TimeRange> takenTimeRangesSorted = events.stream()
+            .filter((event)->hasAttendee(event, requestedAttendees))
+            .map(Event::getWhen)
+            .collect(Collectors.toCollection(()->new TreeSet<>(TimeRange.ORDER_BY_START)));
 
     TimeRange guardian = TimeRange.fromStartDuration(TimeRange.END_OF_DAY+1, 0); //Shouldn't timerange set outside the minutes of the day be invalid?
-    timeRangesSorted.add(guardian); //Could be done by an additional if at the end as well
+    takenTimeRangesSorted.add(guardian); //Could be done by an additional if at the end as well
 
     int lastFinish = TimeRange.START_OF_DAY;
     Collection<TimeRange> appropriateTimeranges = new ArrayList<TimeRange>();
-    for(TimeRange nextEvent: timeRangesSorted){
-      if(lastFinish < nextEvent.start()){ //should I extract nextEvent.start() to a local variable?
-        TimeRange empty = TimeRange.fromStartEnd(lastFinish, nextEvent.start(), false);
-        if(empty.duration() >= request.getDuration()){
+    for(TimeRange nextEvent: takenTimeRangesSorted){
+      int nextEventStart = nextEvent.start();
+      int nextEventEnd = nextEvent.end();
+      if(lastFinish < nextEventStart){ //should I extract nextEvent.start() to a local variable?
+        TimeRange empty = TimeRange.fromStartEnd(lastFinish, nextEventStart, false);
+        if(empty.duration() >= requestedDuration){
           appropriateTimeranges.add(empty);
         }
       }
-      if(lastFinish < nextEvent.end()){
-        lastFinish = nextEvent.end();
+      if(lastFinish < nextEventEnd){
+        lastFinish = nextEventEnd;
       }
     }
 
     return appropriateTimeranges;
   }
 
-  public boolean hasAttendee(Event event, Collection<String> Attendees){//will it delete the attendees if the event?
-    Collection<String> eventAttendees = new HashSet<String>();
-    eventAttendees.addAll(event.getAttendees());
-    eventAttendees.retainAll(Attendees);
-    return eventAttendees.size() > 0;
+  /**
+   * Returns whether any of the attendees in the passed collection is participating in the event.
+   * */
+  private boolean hasAttendee(Event event, Collection<String> attendees){//will it delete the attendees if the event?
+    return !disjoint(event.getAttendees(), attendees);
   }
 }
