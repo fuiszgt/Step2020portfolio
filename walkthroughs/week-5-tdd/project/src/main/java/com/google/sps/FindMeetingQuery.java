@@ -28,7 +28,11 @@ import static java.util.Collections.disjoint;
 public final class FindMeetingQuery {
 
   /**
-   * 
+   * Finds timeranges where all mandatory attendees can attend the event.
+   * First select all the events that contain a mandatory attendee, and put them in s SortedSet, sorted by start time.
+   * Next, iterate through the set, and keep track of the latest endpoint of all ongoing events.
+   * When the next events start time is after the current latest endpoint, potential timerange is found.
+   * Check for duration of found timerange.
    * */
   public Collection<TimeRange> query(Collection<Event> events, MeetingRequest request) {
 
@@ -40,15 +44,15 @@ public final class FindMeetingQuery {
             .map(Event::getWhen)
             .collect(Collectors.toCollection(()->new TreeSet<>(TimeRange.ORDER_BY_START)));
 
-    TimeRange guardian = TimeRange.fromStartDuration(TimeRange.END_OF_DAY+1, 0); //Shouldn't timerange set outside the minutes of the day be invalid?
-    takenTimeRangesSorted.add(guardian); //Could be done by an additional if at the end as well
+    TimeRange guardian = TimeRange.fromStartDuration(TimeRange.END_OF_DAY+1, 0);
+    takenTimeRangesSorted.add(guardian);
 
     int lastFinish = TimeRange.START_OF_DAY;
     Collection<TimeRange> appropriateTimeranges = new ArrayList<TimeRange>();
     for(TimeRange nextEvent: takenTimeRangesSorted){
       int nextEventStart = nextEvent.start();
       int nextEventEnd = nextEvent.end();
-      if(lastFinish < nextEventStart){ //should I extract nextEvent.start() to a local variable?
+      if(lastFinish < nextEventStart){
         TimeRange empty = TimeRange.fromStartEnd(lastFinish, nextEventStart, false);
         if(empty.duration() >= requestedDuration){
           appropriateTimeranges.add(empty);
@@ -64,8 +68,8 @@ public final class FindMeetingQuery {
 
   /**
    * Returns whether any of the attendees in the passed collection is participating in the event.
-   * */
-  private boolean hasAttendee(Event event, Collection<String> attendees){//will it delete the attendees if the event?
+   */
+  private boolean hasAttendee(Event event, Collection<String> attendees){
     return !disjoint(event.getAttendees(), attendees);
   }
 }

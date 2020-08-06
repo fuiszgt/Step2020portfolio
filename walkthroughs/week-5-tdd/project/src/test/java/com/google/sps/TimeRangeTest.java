@@ -184,4 +184,12 @@ public final class TimeRangeTest {
     Assert.assertTrue(emptyMiddle.overlaps(range));
     Assert.assertTrue(emptyEnd.overlaps(range));
   }
+
+  /**
+   * In FindMeetingQuery.query, a guardian variable (called guardian) makes use of a TimeRange that starts at END_OF_DAY + 1 and ends at the same time.
+   */
+  @Test
+  public void canCreateAfterDayEnded(){
+    TimeRange afterDayEnded = TimeRange.fromStartDuration(TimeRange.END_OF_DAY + 1, 0);
+  }
 }
